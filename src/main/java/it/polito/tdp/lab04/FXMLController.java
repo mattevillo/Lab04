@@ -48,6 +48,12 @@ public class FXMLController {
 
     @FXML
     void btnCercaNomeCognome(ActionEvent event) {
+    	
+     
+    	int matricola = Integer.parseInt(txtNMatricola.getText());
+    	
+    	txtNome.setText(model.getNomeCogomeStudente(matricola).getNome());
+    	txtCognome.setText(model.getNomeCogomeStudente(matricola).getCognome());
 
     }
 
@@ -73,6 +79,7 @@ public class FXMLController {
     
     public void setModel(Model model) {
     	this.model = model;
+    	cmbCorsi.getItems().add(null);
     	cmbCorsi.getItems().addAll(model.getTuttiICorsi());
     }
     
