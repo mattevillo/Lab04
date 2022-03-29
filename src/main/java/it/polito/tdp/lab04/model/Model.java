@@ -24,5 +24,9 @@ public class Model {
 	public Studente getNomeCogomeStudente(int matricola) {
 		return this.studenteDao.getNomeCogomeStudente(matricola);
 	}
+	
+	public List<Studente> getCorsiStudente(String codins){
+		return this.studenteDao.getCorsiStudente(codins);
+	}
 
 }

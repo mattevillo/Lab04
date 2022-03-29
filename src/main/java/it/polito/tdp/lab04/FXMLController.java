@@ -1,10 +1,13 @@
 package it.polito.tdp.lab04;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import it.polito.tdp.lab04.DAO.StudenteDAO;
 import it.polito.tdp.lab04.model.Corso;
 import it.polito.tdp.lab04.model.Model;
+import it.polito.tdp.lab04.model.Studente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -43,6 +46,21 @@ public class FXMLController {
 
     @FXML
     void btnCercaIscrittiCorso(ActionEvent event) {
+    	
+    	if (cmbCorsi.getValue() == null) {
+    		txtRisultati.setText("Selezionare un corso");
+    		return;
+    	}
+    	
+    	Corso combobox = cmbCorsi.getValue();
+    	String codins = combobox.getCodins();
+    	
+    	List<Studente> studenti = this.model.getCorsiStudente(codins);
+    	
+    	for(Studente s: studenti) {
+    		txtRisultati.appendText(s +"\n");
+    	}
+    	txtRisultati.setDisable(false);
 
     }
 
