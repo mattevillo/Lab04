@@ -51,6 +51,43 @@ public class CorsoDAO {
 		}
 	}
 	
+	public List<Corso> getCorsiStudenteDaMatricola(int matricola) {
+		
+		List<Corso> result = new LinkedList<Corso>();
+		
+		final String sql = "SELECT c.codins, c.crediti, c.nome, c.pd "
+				+ "FROM iscrizione i, corso c "
+				+ "WHERE i.codins = c.codins and i.matricola= ? ";
+
+
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			
+			st.setInt(1, matricola);
+
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+				String codins = rs.getString("codins");
+				int numeroCrediti = rs.getInt("crediti");
+				String nome = rs.getString("nome");
+				int periodoDidattico = rs.getInt("pd");
+
+				Corso c = new Corso(codins,numeroCrediti, nome, periodoDidattico);
+				result.add(c);
+			}
+
+			conn.close();
+			return result;
+			
+
+		} catch (SQLException e) {
+			// e.printStackTrace();
+			throw new RuntimeException("Errore Db", e);
+		}
+	}
+	
 	
 	/*
 	 * Dato un codice insegnamento, ottengo il corso

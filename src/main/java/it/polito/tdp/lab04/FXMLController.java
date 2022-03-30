@@ -41,11 +41,26 @@ public class FXMLController {
 
     @FXML
     void btnCercaCorsi(ActionEvent event) {
+    	txtRisultati.clear();
+    	
+    	int matricola = Integer.parseInt(txtNMatricola.getText());
+    	
+    	List<Corso> corsi_matricola = model.getCorsiStudenteDaMatricola(matricola);
+    	
+    	for (Corso c: corsi_matricola) {
+    		txtRisultati.appendText(c +"\n");
+    	}
+    	
+    	if (txtRisultati.getText().equals("")) {
+    		txtRisultati.setText("Studente non esistente");
+    	}
+    	
 
     }
 
     @FXML
     void btnCercaIscrittiCorso(ActionEvent event) {
+    	txtRisultati.clear();
     	
     	if (cmbCorsi.getValue() == null) {
     		txtRisultati.setText("Selezionare un corso");
@@ -82,6 +97,10 @@ public class FXMLController {
 
     @FXML
     void btnReset(ActionEvent event) {
+    	txtRisultati.clear();
+    	txtNMatricola.clear();
+    	txtNome.clear();
+    	txtCognome.clear();
 
     }
 

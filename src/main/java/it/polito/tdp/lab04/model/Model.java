@@ -28,5 +28,9 @@ public class Model {
 	public List<Studente> getCorsiStudente(String codins){
 		return this.studenteDao.getCorsiStudente(codins);
 	}
+	
+	public List<Corso> getCorsiStudenteDaMatricola(int matricola) {
+		return this.corsoDao.getCorsiStudenteDaMatricola(matricola);
+	}
 
 }
